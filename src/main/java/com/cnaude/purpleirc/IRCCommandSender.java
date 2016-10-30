@@ -88,7 +88,8 @@ public class IRCCommandSender implements ICommandSender {
 
     @Override
     public void setCommandStat(CommandResultStats.Type type, int amount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        plugin.logDebug("setCommandStat: " + type + " " + amount);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
