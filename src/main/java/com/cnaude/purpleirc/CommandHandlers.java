@@ -27,7 +27,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
-
 /**
  *
  * @author cnaude
@@ -132,7 +131,7 @@ public class CommandHandlers implements ICommand {
 
     @Override
     public java.util.List getCommandAliases() {
-        return new ArrayList<>();
+        return plugin.commandAliases;
     }
 
     @Override
@@ -156,6 +155,5 @@ public class CommandHandlers implements ICommand {
     public java.util.List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 }

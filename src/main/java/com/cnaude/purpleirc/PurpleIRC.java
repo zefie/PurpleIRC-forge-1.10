@@ -118,6 +118,7 @@ public class PurpleIRC {
     public CaseInsensitiveMap<UUID> uuidCache;
 
     public ArrayList<String> kickedPlayers = new ArrayList<>();
+    public List<String> commandAliases = new ArrayList<>();
 
     public final String invalidBotName = RED + "Invalid bot name: "
             + TextFormatting.WHITE + "%BOT%"
@@ -381,6 +382,8 @@ public class PurpleIRC {
         ircConnCheckInterval = getConfig().getOption("conn-check-interval", 1000L);
         reconnectSuppression = getConfig().getOption("reconnect-fail-message-count", 10);
         ircChannelCheckInterval = getConfig().getOption("channel-check-interval", 100L);
+        
+        commandAliases = getConfig().getOption("command-aliases", new ArrayList<String>());
 
     }
 

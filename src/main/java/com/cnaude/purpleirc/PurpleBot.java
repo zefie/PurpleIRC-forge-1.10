@@ -1109,6 +1109,19 @@ public final class PurpleBot {
         if (!this.isConnected()) {
             return;
         }
+        try {
+            Class.forName("net.minecraft.stats.Achievement.func_75989_e");
+        } catch (ClassNotFoundException e) {
+            return;
+        }
+        String achivementDesc;
+        try {
+            achivementDesc = achievement.getDescription();
+        } catch (Exception ex) {
+            plugin.logDebug(ex.getMessage());
+            return;
+        }
+
         for (String channelName : botChannels) {
             if (isMessageEnabled(channelName, TemplateName.GAME_ACHIEVEMENT)) {
                 if (!isPlayerInValidWorld(player, channelName)) {
@@ -1116,7 +1129,7 @@ public final class PurpleBot {
                 }
                 asyncIRCMessage(channelName, plugin.tokenizer
                         .gameChatToIRCTokenizer(player, plugin.getMsgTemplate(
-                                botNick, TemplateName.GAME_ACHIEVEMENT), achievement.getDescription()));
+                                botNick, TemplateName.GAME_ACHIEVEMENT), achivementDesc));
             }
         }
     }
@@ -1527,7 +1540,7 @@ public final class PurpleBot {
                         + " IRC topic for " + TextFormatting.WHITE + channelName
                         + TextFormatting.RESET + ": \""
                         + TextFormatting.WHITE + plugin.colorConverter
-                        .ircColorsToGame(activeTopic.get(channelName))
+                                .ircColorsToGame(activeTopic.get(channelName))
                         + TextFormatting.RESET + "\"");
             }
         }
