@@ -22,8 +22,11 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
@@ -31,7 +34,7 @@ import net.minecraft.util.math.BlockPos;
  *
  * @author cnaude
  */
-public class CommandHandlers implements ICommand {
+public class CommandHandlers extends CommandBase {
 
     public HashMap<String, IRCCommandInterface> commands = new HashMap<>();
     public ArrayList<String> sortedCommands = new ArrayList<>();
@@ -140,16 +143,26 @@ public class CommandHandlers implements ICommand {
         return true;
     }
 
-    @Override
-    public int compareTo(ICommand o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private boolean isPlayerOpped(ICommandSender sender)
+    {
+        if (sender instanceof EntityPlayer)
+        {
+            for (String player : sender.getServer().getPlayerList().getOppedPlayerNames())
+            {
+                if (player.equals(sender.getName()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true; // If it isn't a player, then it's the console
     }
-
-    @Override
-    public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
-        return true;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+	@Override
+	public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
+		return isPlayerOpped(sender);
+	}
 
     @Override
     public java.util.List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos) {

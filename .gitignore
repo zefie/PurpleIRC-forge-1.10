@@ -1,0 +1,15 @@
+/bin/
+
+build/
+
+\.settings/
+
+PurpleIRC-forge-1\.10_Client\.launch
+
+PurpleIRC-forge-1\.10_Server\.launch
+
+\.project
+
+\.classpath
+
+\.gradle/
